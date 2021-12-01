@@ -8,6 +8,7 @@ describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
   let mockUserService: jasmine.SpyObj<UserService>;
+  let template: HTMLElement;
 
   beforeEach(async () => {
     mockUserService = jasmine.createSpyObj('mockUserService', ['fetchUsers']);
@@ -22,6 +23,7 @@ describe('UsersComponent', () => {
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    template = fixture.nativeElement;
   });
 
   it('should create', () => {
@@ -55,6 +57,35 @@ describe('UsersComponent', () => {
 
       // Then - component users to equal user service list of users
       expect(component.users).toEqual(users);
+    });
+  });
+
+  describe('ui tests', () => {
+    it('should display an element for each user', () => {
+      // Given - Users list
+      component.users = [
+        {
+          id: 1,
+          email: 'george.bluth@reqres.in',
+          firstName: 'George',
+          lastName: 'Bluth',
+          avatarUrl: 'https://reqres.in/img/faces/1-image.jpg',
+        },
+        {
+          id: 2,
+          email: 'janet.weaver@reqres.in',
+          firstName: 'Janet',
+          lastName: 'Weaver',
+          avatarUrl: 'https://reqres.in/img/faces/2-image.jpg',
+        },
+      ];
+
+      // When - Fixture detect changes
+      fixture.detectChanges();
+
+      // Then - Exepect and element for each user
+      const userElements = template.querySelectorAll('[data-test="user-el"]');
+      expect(userElements.length).toEqual(component.users.length);
     });
   });
 });
