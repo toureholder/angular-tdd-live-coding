@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 24px;
+}
+
+.example-card {
+  margin-bottom: 24px;
+}
+
+.example-header-image {
+  background-size: cover;
+}

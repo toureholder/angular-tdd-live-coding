@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
 import { of } from 'rxjs';
 import { User, UserService } from 'src/app/services/user.service';
 
@@ -15,6 +16,7 @@ describe('UsersComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [UsersComponent],
+      imports: [MatCardModule],
       providers: [{ provide: UserService, useValue: mockUserService }],
     }).compileComponents();
   });
